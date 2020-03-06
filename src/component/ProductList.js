@@ -1,4 +1,5 @@
 import React from 'react';
+import ProductAdd from './ProductAdd';
 
 class ProductList extends React.Component {
 
@@ -39,30 +40,9 @@ class ProductList extends React.Component {
         } else {
             return (
                 <div>
-                    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                        <a class="navbar-brand" href="http://localhost:3000">Naton</a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarText">
-                            <ul class="navbar-nav mr-auto">
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="http://localhost:3000">Home <span class="sr-only">(current)</span></a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="http://localhost:3000">Product</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="http://localhost:3000">Purchase</a>
-                                </li>
-                            </ul>
-                            <span class="navbar-text">
-                                Naton Beauty Systen.
-                            </span>
-                        </div>
-                    </nav>
-                    <table class="table table-striped">
-                        <thead class="thead-dark">
+                    <ProductAdd />
+                    <table className="table table-striped">
+                        <thead className="thead-dark">
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">name</th>
@@ -70,14 +50,16 @@ class ProductList extends React.Component {
                                 <th scope="col">company</th>
                             </tr>
                         </thead>
+                        <tbody>
                         {items.map(item => (
-                            <tr>
+                            <tr key={item.id}>
                                 <td>{item.id}</td>
                                 <td>{item.name}</td>
                                 <td>{item.packageType}</td>
                                 <td>{item.company}</td>
                             </tr>
                         ))}
+                        </tbody>
                     </table>
                 </div>
             );
