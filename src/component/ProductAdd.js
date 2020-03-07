@@ -1,60 +1,82 @@
 import React from 'react';
+import PackageType from './PackageType';
 
 class ProductAdd extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            error: null,
-            isLoaded: false,
-            items: []
+            name: "",
+            packageType: "",
+            company: ""
         };
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleChange(event) {
+        this.setState({ name: event.target.name,
+                        packageType: event.target.packageType,
+                        company: event.target.company });
+    }
+
+    handleSubmit(event) {
+        var casa = JSON.stringify({
+            name: this.state.name,
+            packageType: this.state.packageType,
+            company: 1,
+        }); 
+
+        fetch('http://localhost:8080/product', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                name: this.state.name,
+                packageType: this.state.packageType,
+                company: 1,
+            }),
+        });
+
+        event.preventDefault();
     }
 
     render() {
         return (
             <div>
-                <br /><br />
-                <div className="input-group mb-3">
-                    <div className="input-group-prepend">
-                        <span className="input-group-text" id="basic-addon1">name</span>
+                <br />
+
+                <form onSubmit={this.handleSubmit}>
+                    <div className="input-group mb-3">
+                        <div className="input-group-prepend">
+                            <span className="input-group-text" id="basic-addon1">name</span>
+                        </div>
+                        <input type="text" className="form-control" placeholder="type product name" aria-label="name" 
+                        aria-describedby="basic-addon1" defaultValue={this.state.name} name="name" onChange={this.handleChange}/>
                     </div>
-                    <input type="text" className="form-control" placeholder="type product name" aria-label="name" aria-describedby="basic-addon1" />
-                </div>
-                <div className="input-group mb-3">
-                    <div className="input-group-prepend">
-                        <label className="input-group-text" htmlFor="inputGroupSelect01">Options</label>
+                    <div className="input-group mb-3">
+                        <div className="input-group-prepend">
+                            <label className="input-group-text" htmlFor="packageTypeSelect">Package Type</label>
+                        </div>
+                        <PackageType />
                     </div>
-                    <select className="custom-select" id="inputGroupSelect01">
-                        <option defaultValue>Package Type</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
-                </div>
-                <div className="input-group mb-3">
-                    <div className="input-group-prepend">
-                        <span className="input-group-text" id="basic-addon1">Package Type</span>
+                    <div className="input-group mb-3">
+                        <div className="input-group-prepend">
+                            <span className="input-group-text" id="basic-addon1">Company</span>
+                        </div>
+                        <input type="text" className="form-control" placeholder="select company" aria-label="company" 
+                        aria-describedby="basic-addon1" defaultValue={this.state.company} name="company" onChange={this.handleChange}/>
                     </div>
-                    <input type="text" className="form-control" placeholder="select package type" aria-label="packageType" aria-describedby="basic-addon1" />
-                </div>
-
-
-                <p>
-                    <button className="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseAddProduct" aria-expanded="false" aria-controls="collapseAddProduct">
-                        Add Product
-                    </button>
-                </p>
-                <div className="collapse" id="collapseAddProduct">
-                    <div className="card card-body">
-                        <h1>teste teste</h1>
-                    </div>
-                </div>
-
-
-
+                    <button type="submit" className="btn btn-primary" value={this.state}
+                        onChange={this.handleChange}>Add Product</button>
+                </form>
+                <br />
 
             </div>
         );
+
     }
 }
 export default ProductAdd;
