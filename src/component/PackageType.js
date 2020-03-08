@@ -6,8 +6,13 @@ class PackageType extends React.Component {
         this.state = {
             error: null,
             isLoaded: false,
-            items: []
+            items: [],
+            packageType: ""
         };
+    }
+
+    handleChangePackageType(event) {
+        alert(event.target.value);
     }
 
     componentDidMount() {
@@ -38,7 +43,7 @@ class PackageType extends React.Component {
         } else {
             return (
                 <div>
-                    <select className="custom-select" id="packageTypeSelect">
+                    <select className="custom-select" id="packageTypeSelect" onChange={this.handleChangePackageType}>
                         <option defaultValue>Select an Option</option>
                         {items.map(item => (
                             <option value={item} id={item}>{item}</option>
