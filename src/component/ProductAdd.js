@@ -1,5 +1,6 @@
 import React from 'react';
 import PackageType from './PackageType';
+import Company from './Company';
 
 class ProductAdd extends React.Component {
     constructor(props) {
@@ -21,17 +22,11 @@ class ProductAdd extends React.Component {
     }
 
     handleChangePackageType(event) {
-        this.setState({ packageType: event.target.value });
+        this.setState({ packageType: event });
     }
 
     handleChangeCompany(event) {
-        this.setState({ company: event.target.value });
-    }
-
-    handleChange(event) {
-        //    this.setState({ name: event.target.value,
-        //                    packageType: event.target.value,
-        //                    company: event.target.value });
+        this.setState({ company: event });
     }
 
     handleSubmit(event) {
@@ -67,14 +62,13 @@ class ProductAdd extends React.Component {
                         <div className="input-group-prepend">
                             <label className="input-group-text" htmlFor="packageTypeSelect">Package Type</label>
                         </div>
-                        <PackageType formulario={this} onChange={this.handleChangePackageType} />
+                        <PackageType onSelectPackageType={this.handleChangePackageType} />
                     </div>
                     <div className="input-group mb-3">
                         <div className="input-group-prepend">
-                            <span className="input-group-text" id="basic-addon1">Company</span>
+                            <label className="input-group-text" htmlFor="companyTypeSelect">Company</label>
                         </div>
-                        <input type="text" className="form-control" placeholder="select company" aria-label="company"
-                            aria-describedby="basic-addon1" defaultValue={this.state.company} name="company" onChange={this.handleChangeCompany} />
+                        <Company onSelectCompany={this.handleChangeCompany} />
                     </div>
                     <button type="submit" className="btn btn-primary" value={this.state}
                         onChange={this.handleChange}>Add Product</button>

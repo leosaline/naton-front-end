@@ -1,25 +1,25 @@
 import React from 'react';
 
-class PackageType extends React.Component {
+class Company extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             error: null,
             isLoaded: false,
             items: [],
-            packageType: ""
+            company: ""
         };
 
-        this.handleChangePackageType = this.handleChangePackageType.bind(this);
+        this.handleChangeCompany = this.handleChangeCompany.bind(this);
     }
 
-    handleChangePackageType(event) {
-        var packType = event.target.value;
-        this.props.onSelectPackageType(packType);
+    handleChangeCompany(event) {
+        var company = event.target.value;
+        this.props.onSelectCompany(company);
     }
 
     componentDidMount() {
-        fetch("http://localhost:9001/packagetypes")
+        fetch("http://localhost:9003/companies")
             .then(res => res.json())
             .then(
                 (result) => {
@@ -46,10 +46,10 @@ class PackageType extends React.Component {
         } else {
             return (
                 <div>
-                    <select className="custom-select" id="packageTypeSelect" onChange={this.handleChangePackageType}>
+                    <select className="custom-select" id="CompanySelect" onChange={this.handleChangeCompany}>
                         <option defaultValue>Select an Option</option>
                         {items.map(item => (
-                            <option value={item} id={item}>{item}</option>
+                            <option value={item.id} id={item.id}>{item.name}</option>
                         ))}
                     </select>
                 </div>
@@ -58,4 +58,4 @@ class PackageType extends React.Component {
     }
 
 }
-export default PackageType;
+export default Company;
