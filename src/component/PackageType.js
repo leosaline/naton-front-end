@@ -16,7 +16,7 @@ class PackageType extends React.Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:8080/packagetypes")
+        fetch("http://localhost:9001/packagetypes")
             .then(res => res.json())
             .then(
                 (result) => {
