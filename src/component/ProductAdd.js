@@ -71,7 +71,7 @@ class ProductAdd extends React.Component {
                         <Company onSelectCompany={this.handleChangeCompany} />
                     </div>
                     <button type="submit" className="btn btn-primary" value={this.state}
-                        onChange={this.handleChange}>Add Product</button>
+                        onChange={this.handleChange} >Add Product</button>
                 </form>
                 <br />
             </div>
