@@ -1,12 +1,13 @@
 import React from 'react';
+import ProductList from './ProductList';
 
 class ProductPage extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
     }
 
-    render(){
-        return(<div><br/>produtos</div>)
+    render() {
+        return (<div><ProductList></ProductList></div>)
     }
 }
 

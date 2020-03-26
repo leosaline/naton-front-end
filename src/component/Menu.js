@@ -1,6 +1,7 @@
 import React from 'react';
 import ProductPage from './ProductPage';
 import PurchasePage from './PurchasePage';
+import ReportPage from './ReportPage';
 import {
     BrowserRouter as Router,
     Switch,
@@ -61,7 +62,7 @@ class Menu extends React.Component {
                             <PurchasePage />
                         </Route>
                         <Route path="/report">
-
+                            <ReportPage />
                         </Route>
                     </Switch>
                 </div>
