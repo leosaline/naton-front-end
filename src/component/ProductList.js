@@ -1,5 +1,7 @@
 import React from 'react';
 import ProductAdd from './ProductAdd';
+import ErrorAlert from './ErrorAlert';
+import LoadingAlert from './LoadingAlert';
 
 class ProductList extends React.Component {
 
@@ -34,9 +36,9 @@ class ProductList extends React.Component {
     render() {
         const { error, isLoaded, items } = this.state;
         if (error) {
-            return <div>Error: {error.message}</div>;
+            return <ErrorAlert message={error.message} />
         } else if (!isLoaded) {
-            return <div>Loading...</div>;
+            return <LoadingAlert message="Loading content..."/>
         } else {
             return (
                 <div>
@@ -51,14 +53,14 @@ class ProductList extends React.Component {
                             </tr>
                         </thead>
                         <tbody>
-                        {items.map(item => (
-                            <tr key={item.id}>
-                                <td>{item.id}</td>
-                                <td>{item.name}</td>
-                                <td>{item.packageType}</td>
-                                <td>{item.company}</td>
-                            </tr>
-                        ))}
+                            {items.map(item => (
+                                <tr key={item.id}>
+                                    <td>{item.id}</td>
+                                    <td>{item.name}</td>
+                                    <td>{item.packageType}</td>
+                                    <td>{item.company}</td>
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
                 </div>
