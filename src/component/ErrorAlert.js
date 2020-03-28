@@ -9,7 +9,7 @@ class ErrorAlert extends React.Component {
         return (
             <div>
                 <br /><br />
-                <div class="alert alert-danger" role="alert">
+                <div className="alert alert-danger" role="alert">
                     {this.props.message}
                 </div>
             </div>

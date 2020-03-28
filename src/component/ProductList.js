@@ -10,8 +10,22 @@ class ProductList extends React.Component {
         this.state = {
             error: null,
             isLoaded: false,
-            items: []
+            items: [],
+            company: []
         };
+    }
+
+    fetchCompanyName(id) {
+        fetch("http://localhost:9003/company/1")
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    return result.name;
+                },
+                (error) => {
+                    alert(error);
+                }
+            )
     }
 
     componentDidMount() {
@@ -38,7 +52,7 @@ class ProductList extends React.Component {
         if (error) {
             return <ErrorAlert message={error.message} />
         } else if (!isLoaded) {
-            return <LoadingAlert message="Loading content..."/>
+            return <LoadingAlert message="Loading content..." />
         } else {
             return (
                 <div>
@@ -58,7 +72,7 @@ class ProductList extends React.Component {
                                     <td>{item.id}</td>
                                     <td>{item.name}</td>
                                     <td>{item.packageType}</td>
-                                    <td>{item.company}</td>
+                                    <td>{this.fetchCompanyName(item.company)}</td>
                                 </tr>
                             ))}
                         </tbody>

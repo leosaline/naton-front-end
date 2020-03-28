@@ -9,7 +9,7 @@ class LoadingAlert extends React.Component {
         return (
             <div>
                 <br /><br />
-                <div class="alert alert-primary" role="alert">
+                <div className="alert alert-primary" role="alert">
                     {this.props.message}
                 </div>
             </div>
