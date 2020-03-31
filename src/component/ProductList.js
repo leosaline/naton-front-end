@@ -10,22 +10,8 @@ class ProductList extends React.Component {
         this.state = {
             error: null,
             isLoaded: false,
-            items: [],
-            company: []
+            items: []
         };
-    }
-
-    fetchCompanyName(id) {
-        fetch("http://localhost:9003/company/1")
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    return result.name;
-                },
-                (error) => {
-                    alert(error);
-                }
-            )
     }
 
     componentDidMount() {
@@ -72,7 +58,7 @@ class ProductList extends React.Component {
                                     <td>{item.id}</td>
                                     <td>{item.name}</td>
                                     <td>{item.packageType}</td>
-                                    <td>{this.fetchCompanyName(item.company)}</td>
+                                    <td>{item.companyName}</td>
                                 </tr>
                             ))}
                         </tbody>
