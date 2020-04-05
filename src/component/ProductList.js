@@ -33,6 +33,13 @@ class ProductList extends React.Component {
             )
     }
 
+    componentWillUnmount() {  
+        this.setState({
+            isLoaded: false,
+            items: null
+        });
+    }
+
     render() {
         const { error, isLoaded, items } = this.state;
         if (error) {
