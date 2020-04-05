@@ -37,22 +37,42 @@ class PurchaseSelectProduct extends React.Component {
         });
     }
 
+    handleOnChange(e) {
+        e.preventDefault();
+        fetch("http://localhost:9001/product/" + e.target.value)
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    this.setState({
+                        isLoaded: true,
+                        items: result
+                    });
+                },
+                (error) => {
+                    this.setState({
+                        isLoaded: true,
+                        error
+                    });
+                }
+            )
+    }
+
     render() {
         return (
             <div>
-                <div class="input-group mb-3">
-                    <div class="input-group-append">
-                        <button class="btn btn-primary" type="button" id="buttoncode">Add Product</button>
+                <div className="input-group mb-3">
+                    <div className="input-group-append">
+                        <button className="btn btn-primary" type="button" id="buttoncode">Add Product</button>
                     </div>
-                    <input type="text" class="form-control" placeholder="Type Product code" aria-label="Product Code" aria-describedby="buttoncode" />
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">Quantity</span>
+                    <input type="text" className="form-control" onChange={this.handleOnChange} placeholder="Type Product code" aria-label="Product Code" aria-describedby="buttoncode" />
+                    <div className="input-group-prepend">
+                        <span className="input-group-text" id="basic-addon1">Quantity</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Quantity" aria-label="Quantity" aria-describedby="basic-addon1" defaultValue='1' />
+                    <input type="text" className="form-control" placeholder="Quantity" aria-label="Quantity" aria-describedby="basic-addon1" defaultValue='1' />
                 </div>
                 <br />
                 <div>
-                    <table class="table table-hover">
+                    <table className="table table-hover">
                         <thead>
                             <tr>
                                 <th scope="col">Item nº</th>
@@ -76,14 +96,14 @@ class PurchaseSelectProduct extends React.Component {
                             </tr>
                             <tr>
                                 <th scope="row">3</th>
-                                <td colspan="2">Larry the Bird</td>
+                                <td colSpan="2">Larry the Bird</td>
                                 <td>@twitter</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 <br/>
-                <button type="button" class="btn btn-primary">Confirm Purchase</button>
+                <button type="button" className="btn btn-primary">Confirm Purchase</button>
             </div>
         )
     }

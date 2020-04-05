@@ -1,5 +1,4 @@
 import React from 'react';
-import ProductList from './component/ProductList';
 import Menu from './component/Menu';
 import { HashRouter } from 'react-router-dom';
 
