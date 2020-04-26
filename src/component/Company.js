@@ -49,7 +49,7 @@ class Company extends React.Component {
                     <select className="custom-select" id="CompanySelect" onChange={this.handleChangeCompany}>
                         <option defaultValue>Select an Option</option>
                         {items.map(item => (
-                            <option value={item.id} id={item.id}>{item.name}</option>
+                            <option value={item.id} key={item.id}>{item.name}</option>
                         ))}
                     </select>
                 </div>

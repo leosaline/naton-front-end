@@ -49,7 +49,7 @@ class PackageType extends React.Component {
                     <select className="custom-select" id="packageTypeSelect" onChange={this.handleChangePackageType}>
                         <option defaultValue>Select an Option</option>
                         {items.map(item => (
-                            <option value={item} id={item}>{item}</option>
+                            <option value={item} key={item.id}>{item}</option>
                         ))}
                     </select>
                 </div>
