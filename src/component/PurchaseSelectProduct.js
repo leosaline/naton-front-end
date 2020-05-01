@@ -1,6 +1,5 @@
 import React from 'react';
 import ErrorAlert from './ErrorAlert';
-import LoadingAlert from './LoadingAlert';
 
 class PurchaseSelectProduct extends React.Component {
     constructor(props) {
@@ -31,14 +30,22 @@ class PurchaseSelectProduct extends React.Component {
         });
     }
 
+    loadURL(){
+        if(process.env.REACT_APP_CONTAINER_ENABLED == 'true'){
+            return process.env.REACT_APP_DOMAIN_PURCHASE;
+        } else {
+            return process.env.REACT_APP_DOMAIN_GENERAL;
+        } 
+    }
+
     handleOnClick = (e) => {
         e.preventDefault();
-
+        var URL = this.loadURL();
+        
         if (e.target.value != '') {
-            fetch("http://localhost:9001/product/" + e.target.value)
+            fetch(URL + "product/" + e.target.value)
                 .then((response) => response.json())
                 .then(json => {
-                    
                     this.setState({ items: json });
                 });
         }

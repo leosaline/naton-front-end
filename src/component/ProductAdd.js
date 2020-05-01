@@ -29,8 +29,18 @@ class ProductAdd extends React.Component {
         this.setState({ company: event });
     }
 
+    loadURL(){
+        if(process.env.REACT_APP_CONTAINER_ENABLED == 'true'){
+            return process.env.REACT_APP_DOMAIN_PRODUCT;
+        } else {
+            return process.env.REACT_APP_DOMAIN_GENERAL;
+        } 
+    }
+
     handleSubmit(event) {
-        fetch('http://localhost:9001/product', {
+        var URL = this.loadURL();
+
+        fetch(URL + "product", {
             method: 'POST',
             headers: {
                 Accept: 'application/json',

@@ -18,8 +18,18 @@ class Company extends React.Component {
         this.props.onSelectCompany(company);
     }
 
+    loadURL(){
+        if(process.env.REACT_APP_CONTAINER_ENABLED == 'true'){
+            return process.env.REACT_APP_DOMAIN_COMPANY;
+        } else {
+            return process.env.REACT_APP_DOMAIN_GENERAL;
+        } 
+    }
+
     componentDidMount() {
-        fetch("http://localhost:9003/companies")
+        var URL = this.loadURL();
+
+        fetch(URL + "companies")
             .then(res => res.json())
             .then(
                 (result) => {

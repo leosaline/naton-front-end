@@ -14,8 +14,18 @@ class ProductList extends React.Component {
         };
     }
 
+    loadURL(){
+        if(process.env.REACT_APP_CONTAINER_ENABLED == 'true'){
+            return process.env.REACT_APP_DOMAIN_PRODUCT;
+        } else {
+            return process.env.REACT_APP_DOMAIN_GENERAL;
+        } 
+    }
+
     componentDidMount() {
-        fetch("http://localhost:9001/products")
+        var URL = this.loadURL();
+
+        fetch(URL + "products")
             .then(res => res.json())
             .then(
                 (result) => {
