@@ -8,48 +8,69 @@ class PurchaseSelectProduct extends React.Component {
             error: null,
             isLoaded: false,
             products: [],
-            items: []
+            items: [],
+            id: null
         };
+
+        this.handleOnChangeIdSeek = this.handleOnChangeIdSeek.bind(this);
     }
 
     componentDidMount() {
     }
 
+    handleOnChangeIdSeek(event) {
+        this.setState({ id: event.target.value });
+    }
+
     componentDidUpdate(prevProps) {
         // Uso típico, (não esqueça de comparar as props):
         if (this.props.userID !== prevProps.userID) {
-          this.fetchData(this.props.userID);
+            this.fetchData(this.props.userID);
         }
-      }
+    }
 
     componentWillUnmount() {
         this.setState({
             isLoaded: false,
             items: null,
-            products: null
+            products: null,
+            id: null
         });
     }
 
-    loadURL(){
-        if(process.env.REACT_APP_CONTAINER_ENABLED == 'true'){
+    loadURL() {
+        if (process.env.REACT_APP_CONTAINER_ENABLED == 'true') {
             return process.env.REACT_APP_DOMAIN_PURCHASE;
         } else {
             return process.env.REACT_APP_DOMAIN_GENERAL;
-        } 
+        }
+    }
+
+    validateExistItem(id) {
+        var i;
+        for (i = 0; i < this.state.items.length; i++) {
+            if (this.state.items[i].id == id){
+                return true;
+            }
+        }
+        return false;
     }
 
     handleOnClick = (e) => {
         e.preventDefault();
         var URL = this.loadURL();
-        
-        if (e.target.value != '') {
-            fetch(URL + "product/" + e.target.value)
-                .then((response) => response.json())
-                .then(json => {
-                    this.setState({ items: json });
-                });
-        }
 
+        if (this.state.id != '') {
+            if (!this.validateExistItem(this.state.id)) {
+                fetch(URL + "product/" + this.state.id)
+                    .then((response) => response.json())
+                    .then(json => {
+                        if (json.id != null) {
+                            this.setState({ items: [...this.state.items, json] });
+                        }
+                    });
+            }
+        }
     }
 
     render() {
@@ -61,9 +82,9 @@ class PurchaseSelectProduct extends React.Component {
                 <div>
                     <div className="input-group mb-3">
                         <div className="input-group-append">
-                            <button className="btn btn-primary" type="button" id="buttoncode">Add Product</button>
+                            <button className="btn btn-primary" type="button" onClick={this.handleOnClick} id="buttoncode">Add Product</button>
                         </div>
-                        <input type="text" className="form-control" onClick={this.handleOnClick} placeholder="Type Product code" aria-label="Product Code" aria-describedby="buttoncode" />
+                        <input type="text" onChange={this.handleOnChangeIdSeek} className="form-control" placeholder="Type Product code" aria-label="Product Code" aria-describedby="buttoncode" />
                         <div className="input-group-prepend">
                             <span className="input-group-text" id="basic-addon1">Quantity</span>
                         </div>
