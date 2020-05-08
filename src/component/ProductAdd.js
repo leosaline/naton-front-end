@@ -29,12 +29,12 @@ class ProductAdd extends React.Component {
         this.setState({ company: event });
     }
 
-    loadURL(){
-        if(process.env.REACT_APP_CONTAINER_ENABLED == 'true'){
+    loadURL() {
+        if (process.env.REACT_APP_CONTAINER_ENABLED == 'true') {
             return process.env.REACT_APP_DOMAIN_PRODUCT;
         } else {
             return process.env.REACT_APP_DOMAIN_GENERAL;
-        } 
+        }
     }
 
     handleSubmit(event) {
@@ -81,7 +81,7 @@ class ProductAdd extends React.Component {
                         <Company onSelectCompany={this.handleChangeCompany} />
                     </div>
                     <button type="submit" className="btn btn-primary" value={this.state}
-                        onChange={this.handleChange} >Add Product</button>
+                        onSubmit={this.handleSubmit}>Add Product</button>
                 </form>
                 <br />
             </div>
